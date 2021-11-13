@@ -317,13 +317,13 @@ export default {
     position: relative;
     a {
       text-decoration: none;
-      color: #000;
+      color: #4e4d4d;
       outline: none;
       display: flex;
       align-items: center;
     }
     i {
-      font-size: 25px;
+      font-size: 18px;
       margin-right: 5px;
     }
   }
@@ -341,6 +341,16 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
+  .back {
+    a {
+      color: #4e4d4d;
+      font-size: 14px;
+    }
+    i {
+      font-size: 18px !important;
+      margin-right: 5px;
+    }
+  }
   .content-modal .modal {
     min-width: inherit;
     max-width: inherit;
@@ -369,11 +379,11 @@ export default {
   .single {
     padding-top: 25px !important;
     .back {
-      border: 1px solid gray;
+      border: 1px solid #80808070;
       width: fit-content;
       padding: 3px !important;
       border-radius: 12px;
-      padding-bottom: 0px !important;
+      /* padding-bottom: 0px !important; */
       left: 0px !important;
     }
     // .element-center {
