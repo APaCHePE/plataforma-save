@@ -239,7 +239,7 @@ export default {
         }
       });
 
-      this.showModalSend = true;
+      // this.showModalSend = true;
 
       this.$http
         .post("/solicitud/requerimientos/crear-solicitud", this.user)
