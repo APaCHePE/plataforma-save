@@ -3,11 +3,11 @@
     <div class="container">
       <div class="top white">
         <div class="logo" v-if="user">
-          <router-link to="/" v-if="user.id_008_tipo == 15 | user.id_008_tipo == 5">Tuasesorlegal.pe</router-link>
+          <router-link to="/" v-if="user.id_008_tipo == 15 | user.id_008_tipo == 5">.pe</router-link>
           <router-link to="/lawyer" v-if="user.id_008_tipo == 16">Tuasesorlegal.pe</router-link>
         </div>
         <div class="logo" v-if="!user">
-          <router-link to="/">Tuasesorlegal.pe</router-link>
+          <router-link to="/"><img src="../../assets/images/miraflores-en-tu-corazon.png" width="100px"/></router-link>
         </div>
 
         <div class="r-btn" v-if="user">
@@ -23,8 +23,8 @@
 
 
         <div class="r-btn" v-else>
-          <a class="btn" href="#" @click="$emit('showmodal', true)">Soy abogado</a>
-          <a class="btn" href="#" @click="$emit('showmodal', true)">Ingresar</a>
+          <a class="btn" href="#" @click="$emit('showmodal', true)">Ingresa a tu cuenta</a>
+          <a class="btn" href="#" @click="$emit('showmodal', true)">Soy Funcionario</a>
         </div>
 
         <message-active :usuario="this.user" v-if="showModal" @grabarmodal="grabarmodal"/> 

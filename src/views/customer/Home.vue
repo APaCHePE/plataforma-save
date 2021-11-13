@@ -3,8 +3,8 @@
     <div class="container">
       <div class="description" >
         <p class="text-center" style="align: center">
-          Te ayudamos en la busqueda de un
-          <span class="text-blue">Asesor Legal</span>
+          Ahora reporta un problema en tu 
+          <span class="text-blue">Plataforma Digital</span>
         </p>
       </div>
       <div class="bottom">
@@ -13,15 +13,15 @@
             <img src="@/assets/icono1.png" alt="" />
           </div>
           <div class="card-right">
-            <h1>Tengo un problema</h1>
+            <h1>Servicio de Atencion Vecinal</h1>
             <p>
-              Busco me asesoren según mi problema, deseo
-              <span>hacer una consulta.</span>
+              Juntos mejoramos nuestro distrito, deseo 
+              <span>reportar un incidente.</span>
             </p>
             <i class="el-icon-arrow-right"></i>
           </div>
         </router-link>
-        <a href="#" class="card b-green">
+        <!-- <a href="#" class="card b-green">
           <div class="card-left">
             <img src="@/assets/icono2.png" alt="" />
           </div>
@@ -33,7 +33,7 @@
             </p>
             <i class="el-icon-arrow-right"></i>
           </div>
-        </a>
+        </a> -->
       </div>
     </div>
   </div>
@@ -54,7 +54,8 @@ export default {
   },
 
   created() {
-    document.body.style.backgroundColor = "#DDF3FF";
+    // document.body.style.backgroundColor = "#DDF3FF";
+    document.body.style.backgroundColor = "#EAF0F9";
     console.log(this.$route.params["hash"])
     if(this.$route.params["hash"]){
 
