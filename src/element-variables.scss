@@ -1,0 +1,28 @@
+/*
+Write your variables here. All available variables can be
+found in element-ui/packages/theme-chalk/src/common/var.scss.
+For example, to overwrite the theme color:
+*/
+$--color-primary: #715ed9;
+
+/* icon font path, required */
+$--font-path: "~element-ui/lib/theme-chalk/fonts";
+
+@import "~element-ui/packages/theme-chalk/src/index";
+.el-input__inner {
+  border-radius: 20px;
+}
+.el-textarea__inner {
+  border-radius: 20px;
+}
+.el-menu {
+  background: transparent;
+}
+.el-menu--horizontal > .el-menu-item {
+  color:#3A7BDD;
+  font-weight: 600;
+}
+.el-menu--horizontal > .el-menu-item:not(.is-disabled):hover {
+  background: transparent;
+  color:#3A7BDD;
+}
