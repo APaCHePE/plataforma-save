@@ -7,6 +7,7 @@
     />
     <router-view :userlogin="user"></router-view>
     <modal-login
+      :tipoLogin="tipoLogin"
       v-show="enableModal"
       @login="login"
       @close="showModal"
@@ -34,8 +35,8 @@ export default {
   data() {
     return {
       enableModal: null,
-      user: null
-     
+      user: null,
+      tipoLogin: null,
     }
   },
   methods : {
@@ -62,7 +63,10 @@ export default {
 // },
     
     showModal (val) {
-      this.enableModal = val
+      console.log(val);
+      this.enableModal = val.modal
+      if(val.tipo != null )
+        this.tipoLogin = val.tipo
     },
     logout() {
       localStorage.clear()

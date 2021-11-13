@@ -23,11 +23,11 @@
 
 
         <div class="r-btn" v-else>
-          <a class="btn" href="#" @click="$emit('showmodal', true)">Ingresa a tu cuenta</a>
-          <a class="btn" href="#" @click="$emit('showmodal', true)">Soy Funcionario</a>
+          <a class="btn" href="#" @click="$emit('showmodal', { modal: true , tipo: 1}); $emit('tipoLogin', 1)">Ingresa a tu cuenta</a>
+          <a class="btn" href="#" @click="$emit('showmodal', { modal: true , tipo: 2}); $emit('tipoLogin', 2)">Soy Funcionario</a>
         </div>
 
-        <message-active :usuario="this.user" v-if="showModal" @grabarmodal="grabarmodal"/> 
+        <message-active :tipoLogin="this.tipoLogin" :usuario="this.user" v-if="showModal" @grabarmodal="grabarmodal"/> 
       </div>
     </div>
   </header>
@@ -47,6 +47,7 @@ export default {
     return {
       pathHome : null,
       showModal: false,
+      tipoLogin: null
     }
   },
   methods: {

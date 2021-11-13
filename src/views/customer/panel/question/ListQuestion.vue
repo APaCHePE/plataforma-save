@@ -3,8 +3,8 @@
     <nav>
       <div class="container">
         <el-menu class="el-menu-demo" mode="horizontal">
-          <el-menu-item @click="consultas()" index="1">Mis Consultas</el-menu-item>
-          <el-menu-item @click="citas()" index="2">Mis Citas</el-menu-item>
+          <el-menu-item @click="consultas()" index="1">Mis Reportes</el-menu-item>
+          <el-menu-item @click="citas()" index="2">Mis Datos</el-menu-item>
         </el-menu>
       </div>
     </nav>
@@ -168,8 +168,8 @@ export default {
     }
   },
   created() {
-    this.ListCitas()
-    this.getQuestions()
+    // this.ListCitas()
+    // this.getQuestions()
   },
   methods: {
 // openModal(valor){

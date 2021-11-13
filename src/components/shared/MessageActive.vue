@@ -7,8 +7,8 @@
         <div style="column-count: 2">
           <div>
             <br><p class="text-blue">Por motivos de seguridad, le enviamos 
-              un correo con el codigo de verificación para asegurar su integridad</p><br>
-            <br><p class="text-blue">Por favor revise su gmail para activarlo!!</p><br>
+              un correo con el codigo de verificación para asegurar su identidad</p><br>
+            <br><p class="text-blue">Por favor revise su correo para activarlo!!</p><br>
           </div>
           <div style="text-align: center">
             <img style="width:45%" src="https://www.flaticon.es/premium-icon/icons/svg/1061/1061995.svg">

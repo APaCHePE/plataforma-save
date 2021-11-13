@@ -34,6 +34,7 @@
 <script>
 import EventBus from '@/helpers/EventBus'
 export default {
+  props: ["tipoLogin"],
   created() {
     EventBus.$on('sendData', (val) => {
         this.sendData(val)
@@ -64,24 +65,31 @@ export default {
     sendData(val) {
        console.log("************************************")
       console.log(val)
-      const endpoint = "/usuario/getLoginUsuario/"
-      this.$http.post(endpoint, val).then((response) => {
-        if(response.data.success) {
-          console.log(response)
-          this.$emit('close', false)
-          this.$emit('login', response.data.resultado[0])
-          if(val?.redirecEmail){
-            if(val.tipo == 1){
-              this.$router.push('/lawyer')
-            }
-            else{
-              this.$router.push('/panel')
-            }
-          }
-        } else {
-          this.$message.error('Usuario o clave incorrecto')
-        }
-      });
+      // const endpoint = "/usuario/getLoginUsuario/"
+      // this.$http.post(endpoint, val).then((response) => {
+      //   if(response.data.success) {
+      //     console.log(response)
+          this.$emit('close', {modal: false})
+          // this.$emit('login', response.data.resultado[0])
+          this.$emit('login', val)
+          // if(val?.redirecEmail){
+          //   if(val.tipo == 1){
+            
+      if(this.tipoLogin != null && this.tipoLogin == 2) {
+        this.$router.push('/lawyer')
+      }else [
+        this.$router.push('/panel')
+      ]
+              // this.$router.push('/lawyer')
+          //   }
+          //   else{
+              // this.$router.push('/panel')
+      //       }
+      //     }
+      //   } else {
+      //     this.$message.error('Usuario o clave incorrecto')
+      //   }
+      // });
     },
     validData(usuario) {
       this.$refs[usuario].validate((valid) => {

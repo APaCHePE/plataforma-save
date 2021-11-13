@@ -5,16 +5,12 @@
         <el-menu class="el-menu-demo" mode="horizontal">
           <el-menu-item index="1" @click="respondidos()">Respondidos</el-menu-item>
           <el-menu-item index="2" @click="responder()">Pendientes</el-menu-item>
-          <el-menu-item index="3" @click="horario()">Horario</el-menu-item>
-          <el-menu-item index="4" @click="schedule()">Disponibilidad</el-menu-item>
-          <el-menu-item index="5" @click="disponibilidad()">Calendario</el-menu-item>
         </el-menu>
       </div>
     </nav>
     <div class="single">
       <div class="container">
         <div class="single--container">
-
           <div v-if="visibleRespondidos">
             <template v-if="listQuestion!=null && listQuestion.length>0 ">
               <div class="desk">
@@ -49,7 +45,6 @@
                 </el-table-column>
               </el-table>
               </div>
-
 
               <div class="mobile">
               <el-table
@@ -88,7 +83,6 @@
             </template>
           </div>
 
-
           <div v-if="visibleResponder">
             <template v-if="listQuestion1!=null && listQuestion1.length>0 ">
               <slopes :listQuestion1="listQuestion1"/>
@@ -100,24 +94,6 @@
             </template>
           </div>
 
-          <div v-if="visibleHorario">
-            <template>
-              <horario :id_abogado="id_abogado"/>
-            </template>
-          </div>
-
-          <div v-if="visibleSchedule">
-            <template>
-              <!-- <schedule/> -->
-              <detalle :userlogin="userlogin"/>
-            </template>
-          </div>
-          <div v-if="visibleDisponibilidad">
-            <template>
-              <schedule :userlogin="userlogin"/>
-            </template>
-          </div>
-
         </div>
       </div>
     </div>
@@ -126,16 +102,14 @@
 
 <script>
 import Slopes from "./Slopes.vue"
-import Horario from "../cita/Horario.vue"
-import Schedule from "./Schedule.vue"
-import Detalle from "./Detalle.vue"
+// import Horario from "../cita/Horario.vue"
 import EventBus from '@/helpers/EventBus'
 export default {
   components: {
     Slopes,
-    Horario,
-    Schedule,
-    Detalle
+    // Horario,
+    // Schedule,
+    // Detalle
   },
   props:['userlogin'],
   data () {
@@ -144,9 +118,6 @@ export default {
       listQuestion1: null,
       visibleRespondidos: false,
       visibleResponder: true,
-      visibleHorario: false,
-      visibleSchedule: false,
-      visibleDisponibilidad: false,
       id_abogado: null,
        user:{
         redirecEmail: null, 
@@ -157,8 +128,17 @@ export default {
     }
   },
   created() {
-    
-     console.log(this.$route.params["hash"])
+    this.listQuestion = [
+      {
+        descripcionAsistenteRecortado: "asda",
+      }
+    ];
+    this.listQuestion1 = [
+      {
+        descripcionAsistenteRecortado: "asda",
+      }
+    ];
+     console.log(this.$route.params["hash"]);
     if(this.$route.params["hash"]){
       const endpoint = '/ObtenerUserPas/'+ this.$route.params["hash"]
       this.$http.get(endpoint).then((response) => {
@@ -209,40 +189,13 @@ export default {
     },
     respondidos(){
       this.getQuestions(),
-      this.visibleRespondidos=true,
-      this.visibleResponder=false,
-      this.visibleHorario=false
-      this.visibleSchedule=false
-      this.visibleDisponibilidad=false
+      this.visibleRespondidos=true;
+      this.visibleResponder=false;
     },
     responder(){
       this.getQuestions1(),
-      this.visibleRespondidos=false,
+      this.visibleRespondidos=false; 
       this.visibleResponder=true
-      this.visibleHorario=false
-      this.visibleSchedule=false
-      this.visibleDisponibilidad=false
-    },
-    horario(){
-      this.visibleHorario=true
-      this.visibleRespondidos=false,
-      this.visibleResponder=false
-      this.visibleSchedule=false
-      this.visibleDisponibilidad=false
-    },
-    schedule(){
-      this.visibleHorario=false
-      this.visibleRespondidos=false,
-      this.visibleResponder=false
-      this.visibleSchedule=true
-      this.visibleDisponibilidad=false
-    },
-    disponibilidad(){
-      this.visibleHorario=false
-      this.visibleRespondidos=false,
-      this.visibleResponder=false
-      this.visibleSchedule=false
-      this.visibleDisponibilidad=true
     },
     getQuestions() {
       const endpoint = '/getAsesoriaAbogado/00/00/'+this.id_abogado+'/00'
@@ -253,10 +206,9 @@ export default {
         });
         let data = response.data.resultado;
           let array = [];
-           if(data!=null){
+        if(data!=null){
           data.forEach(item => {
             if(item.respuesta != null){
-             
               array.push(item)
             }
           });
