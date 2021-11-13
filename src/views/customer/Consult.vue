@@ -35,7 +35,6 @@
                 </el-form-item>
                 <el-form-item prop="provincia ubicacion">
                   <h3 class="title text-blue">Ubicación de ocurrencia</h3>
-                    <!-- class="textarea-height" -->
                   <el-input
                     type="text"
                     placeholder="Escriba una Av./Calle/Jr./Psje"
@@ -44,22 +43,6 @@
                     v-model="user.descripción_solicitante"
                     :autofocus="true"
                   ></el-input>
-                  <!-- <el-select
-                    v-model="user.provincia"
-                    filterable
-                    placeholder="Escriba una Av./Calle/Jr./Psje"
-                    prop="provincia"
-                    @change="getUbigeo(2)"
-                    ref="provincia"
-                    :autofocus="true"
-                  >
-                    <el-option
-                      v-for="(item, index) in listProvincias"
-                      :key="index"
-                      :label="item.nombre"
-                      :value="item.codProvincia"
-                    ></el-option>
-                  </el-select> -->
                 </el-form-item>
               </div>
             </el-form-item>
@@ -107,14 +90,6 @@
                 :autofocus="true"
               ></el-input>
               <el-radio v-model="radio" label="4">No deseo que me respondan</el-radio>
-              <!-- <el-input
-                class="textarea-height"
-                type="text"
-                v-model="user.descripción_solicitante"
-                id="texto"
-                ref="texto"
-                :autofocus="true"
-              ></el-input> -->
             </el-form-item>
             <p class="formP1">Adjuntar archivos (opcional):</p>
             <p class="formP2">Puedes subir un máximo de 20 MB en fotos, videos y/o textos que ayuden a evidenciar tu reclamo.</p>
@@ -123,59 +98,6 @@
                 >Sube tus archivos</el-button
               >
             </el-form-item>
-            <!-- <h1 class="title text-blue">¿Donde esta ocurriendo el problema?</h1>
-            <el-form-item>
-              <div class="min-m">
-                <el-form-item prop="departamento">
-                  <el-select
-                    v-model="user.departamento"
-                    filterable
-                    placeholder="Departamento"
-                    @change="getUbigeo(1)"
-                  >
-                    <el-option
-                      v-for="(item, index) in listDepartamentos"
-                      :key="index"
-                      :label="item.nombre"
-                      :value="item.codDepartamento"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item prop="provincia">
-                  <el-select
-                    v-model="user.provincia"
-                    filterable
-                    placeholder="Provincia"
-                    prop="provincia"
-                    @change="getUbigeo(2)"
-                    ref="provincia"
-                    :autofocus="true"
-                  >
-                    <el-option
-                      v-for="(item, index) in listProvincias"
-                      :key="index"
-                      :label="item.nombre"
-                      :value="item.codProvincia"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item prop="id_ubigeo">
-                  <el-select
-                    v-model="user.id_ubigeo"
-                    filterable
-                    placeholder="Distrito"
-                    @change="getUbigeo()"
-                  >
-                    <el-option
-                      v-for="(item, index) in listDistritos"
-                      :key="index"
-                      :label="item.nombre"
-                      :value="item.idUbigeo"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-              </div>
-            </el-form-item> -->
             <el-form-item class="element-right">
               <el-button type="primary" round @click="send('user')"
                 >Registrar</el-button
@@ -183,7 +105,6 @@
             </el-form-item>
           </el-form>
         </div>
-
         <modal-register
           v-if="showModal"
           @close="close()"
@@ -213,9 +134,6 @@ export default {
     return {
       // variable input radio
       radio: false,
-      // radio2: false,
-      // radio3: false,
-      // radio4: false,
       labelPosition: "top",
       showModal: null,
       showModalSend: null,
