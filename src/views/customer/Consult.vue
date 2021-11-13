@@ -221,7 +221,8 @@ export default {
       this.$nextTick(() => this.$refs.texto.focus());
     },
     sendData(usuario) {
-      console.log(usuario)
+      console.log(' sendData', usuario)
+      console.log(' sendData', this.userlogin)
 
       if (this.radio == 1)  this.user.tipoRespuesta = 1;
 
