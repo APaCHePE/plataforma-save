@@ -138,15 +138,11 @@ export default {
       showModal: null,
       showModalSend: null,
       user: {
-        // usuario: {
-        //   id_008_tipo: 15,
-        //   id_usuario_creador: 6,
-        //   telefono2: null,
-        // },
         idTipoTramite: null,
         ubicacion: null,
         descripcionTramite: null,
         detalleMedioRespuesta: null,
+        idUsuarioCreador:5268
       },
       listTramites: [
         {
@@ -163,8 +159,20 @@ export default {
         },
         {
           idTipoTramite: 3,
+          descripcion: "Tesoreria",
+          asunto: "tramite por Tesoreria",
+          idUnidadDestino: 13,
+        },
+        {
+          idTipoTramite: 4,
           descripcion: "Fiscalización",
           asunto: "tramite por Fiscalización",
+          idUnidadDestino: 13,
+        },
+        {
+          idTipoTramite: 5,
+          descripcion: "Limpieza de parques",
+          asunto: "tramite por Limpieza de parques",
           idUnidadDestino: 13,
         },
       ],
@@ -212,45 +220,26 @@ export default {
     escucha() {
       this.$nextTick(() => this.$refs.texto.focus());
     },
-    // getUbigeo(val) {
-    //   if (val == 1) {
-    //     this.user.provincia = null;
-    //     this.user.id_ubigeo = null;
-    //   } else if (val == 2) {
-    //     this.user.id_ubigeo = null;
-    //   }
-    //   this.$http
-    //     .get(this.endPoint)
-    //     .then((response) => {
-    //       if (
-    //         this.user.departamento == null &&
-    //         this.user.provincia == null &&
-    //         this.user.id_ubigeo == null
-    //       ) {
-    //         this.listDepartamentos = response.data.data;
-    //       } else if (
-    //         this.user.departamento != null &&
-    //         this.user.provincia == null &&
-    //         this.user.id_ubigeo == null
-    //       ) {
-    //         this.listProvincias = response.data.data;
-    //       } else if (
-    //         this.user.departamento != null &&
-    //         this.user.provincia != null &&
-    //         this.user.id_ubigeo == null
-    //       ) {
-    //         this.listDistritos = response.data.data;
-    //       }
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    // },
     sendData(usuario) {
       console.log(usuario)
 
+      if (this.radio == 1)  this.user.tipoRespuesta = 1;
+
+      if (this.radio == 2)  this.user.tipoRespuesta = 2;
+
+      if (this.radio == 3)  this.user.tipoRespuesta = 3;
+
+      if (this.radio == 4)  this.user.tipoRespuesta = 4;
+
+      this.listTramites.forEach((x) => {
+        if (x.idTipoTramite == this.user.idTipoTramite) {
+          this.user.asunto = x.asunto;
+          this.user.idUnidadDestino = x.idUnidadDestino;
+        }
+      });
+
       this.$http
-        .post("/asesoria/InsertAsesoria", this.user)
+        .post("/solicitud/requerimientos/crear-solicitud", this.user)
         .then((response) => {
           if (!this.userlogin) {
             // alert(2222)
@@ -263,7 +252,6 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-
 
       // if (this.userlogin) {
       //   this.user.usuario = {
