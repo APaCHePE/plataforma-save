@@ -10,7 +10,8 @@ import axios from 'axios'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'http://142.93.14.230:8091/api/abogados'
+axios.defaults.baseURL = 'http://localhost:7991/api/'
+// axios.defaults.baseURL = 'http://142.93.14.230:8091/api/abogados'
 //axios.defaults.baseURL = 'http://localhost:8090/api/abogados'
 
 
