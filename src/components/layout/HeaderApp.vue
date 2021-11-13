@@ -12,12 +12,12 @@
 
         <div class="r-btn" v-if="user">
           <div class="nameUser"><i class="el-icon-user"></i> <span>Hola, {{user.cuenta}}</span></div>
-         
+
           <div class="casos">
           <a class="btn" href="#" v-if="!user.flag_activado & (user.id_008_tipo == 15 )" @click="grabarmodal()">Mis casos</a>
           <router-link v-if="pathHome & user.flag_activado & (user.id_008_tipo == 15 )" to="/panel" class="btn">Mis casos</router-link>
           </div>
-        
+
           <a class="btn light" href="#" @click="$emit('logout')">Cerrar Sesión</a>
         </div>
 
@@ -27,7 +27,7 @@
           <a class="btn" href="#" @click="$emit('showmodal', true)">Soy Funcionario</a>
         </div>
 
-        <message-active :usuario="this.user" v-if="showModal" @grabarmodal="grabarmodal"/> 
+        <message-active :usuario="this.user" v-if="showModal" @grabarmodal="grabarmodal"/>
       </div>
     </div>
   </header>
@@ -80,6 +80,7 @@ export default {
   &.white {
     // border-bottom: 0px;
     .r-btn {
+      margin-top: 21px;
       > div {
         display: inline-block;
         font-weight: 600;
@@ -90,7 +91,7 @@ export default {
       }
     }
   }
- 
+
 }
 header {
   display: flex;
@@ -114,8 +115,8 @@ header {
     //  .brr{
     //     visibility: visible;
     //   }
-    .top { 
-      
+    .top {
+
       flex-direction: column;
       padding-top: 0px;
       align-items: center;
@@ -124,8 +125,10 @@ header {
         padding-bottom: 30px;
       }
       .r-btn{
+          display: flex;
           text-align: center;
           bottom: 40px;
+          margin-top: 0px;
           .btn{
             margin-right: 30px !important;
           }
@@ -150,8 +153,8 @@ header {
         float:right;
       }
     }
-      
+
     }
- 
+
   }
 </style>

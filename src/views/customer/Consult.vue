@@ -369,6 +369,10 @@ export default {
   .single {
     padding-top: 25px !important;
     .back {
+      border: 1px solid gray;
+      width: fit-content;
+      padding: 3px !important;
+      border-radius: 12px;
       padding-bottom: 0px !important;
       left: 0px !important;
     }
@@ -389,13 +393,14 @@ export default {
     .min-m {
       margin: 0 !important;
       display: block !important;
-      border: 1px solid green;
+      /* border: 1px solid green; */
       .el-form-item.el-form-item {
-        border: 1px solid red;
+        /* border: 1px solid red; */
         display: block !important;
         margin: 0 !important;
+        width: 100% !important;
         &:last-child {
-          border: 1px solid blue;
+          /* border: 1px solid blue; */
           margin-bottom: 0px !important;
         }
       }
