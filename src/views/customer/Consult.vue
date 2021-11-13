@@ -17,10 +17,10 @@
           >
             <el-form-item>
               <div class="min-m">
-                <el-form-item prop="departamento">
+                <el-form-item prop="problema">
                   <h3 class="title text-blue">Tipo de problema</h3>
                   <el-select
-                    v-model="user.departamento"
+                    v-model="user.problema"
                     filterable
                     placeholder="Seleccione"
                     @change="getUbigeo(1)"
@@ -33,14 +33,14 @@
                     ></el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item prop="provincia ubicacion">
+                <el-form-item prop="ubicacion">
                   <h3 class="title text-blue">Ubicación de ocurrencia</h3>
                   <el-input
                     type="text"
                     placeholder="Escriba una Av./Calle/Jr./Psje"
                     id="texto"
                     ref="texto"
-                    v-model="user.descripción_solicitante"
+                    v-model="user.ubicacion"
                     :autofocus="true"
                   ></el-input>
                 </el-form-item>
@@ -51,20 +51,20 @@
               <el-input
                 class="textarea-height"
                 type="textarea"
-                v-model="user.descripción_solicitante"
+                v-model="user.descripcion"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
               ></el-input>
             </el-form-item>
-            <el-form-item prop="descripción_solicitante">
+            <el-form-item prop="respuesta_solicitante">
               <h3 class="title text-blue">Medio de Respuesta</h3>
               <el-radio v-model="radio" label="1">Correo</el-radio><br/>
               <el-input
                 v-if="radio == 1"
                 class="textarea-height"
                 type="text"
-                v-model="user.descripción_solicitante"
+                v-model="user.correo"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
@@ -74,7 +74,7 @@
                 v-if="radio == 2"
                 class="textarea-height"
                 type="text"
-                v-model="user.descripción_solicitante"
+                v-model="user.telefono"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
@@ -84,7 +84,7 @@
                 v-if="radio == 3"
                 class="textarea-height"
                 type="text"
-                v-model="user.descripción_solicitante"
+                v-model="user.carta"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
@@ -143,34 +143,36 @@ export default {
           id_usuario_creador: 6,
           telefono2: null,
         },
-        descripción_solicitante: null,
-        id_ubigeo: null,
-        departamento: null,
-        provincia: null,
+        problema: null,
+        ubicacion: null,
+        descripcion: null,
+        correo: null,
+        telefono: null,
+        carta: null,
       },
       listDepartamentos: null,
       listProvincias: null,
       listDistritos: null,
       rules: {
-        departamento: [
+        problema: [
           {
             required: true,
-            message: "Seleccione departamento",
+            message: "Seleccione problema",
             trigger: "change",
           },
         ],
-        provincia: [
+        ubicacion: [
           {
             required: true,
-            message: "Seleccione provincia",
+            message: "Seleccione ubicacion",
             trigger: "change",
           },
-        ],
-        id_ubigeo: [
-          { required: true, message: "Seleccione distrito", trigger: "change" },
         ],
         descripción_solicitante: [
-          { required: true, message: "Cuentanos tu problema", trigger: "blur" },
+          { required: true, message: "Cuentanos tu problema", trigger: "change" },
+        ],
+        respuesta_solicitante: [
+          { required: true, message: "Seleccione medio de respuesta", trigger: "blur" },
         ],
       },
     };
