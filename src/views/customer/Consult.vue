@@ -196,56 +196,56 @@ export default {
     };
   },
   computed: {
-    endPoint() {
-      return (
-        "/ubigeo/" +
-        (this.user.departamento == null ? "00" : this.user.departamento) +
-        "/" +
-        (this.user.provincia == null ? "00" : this.user.provincia) +
-        "/" +
-        (this.user.id_ubigeo == null ? "00" : this.user.id_ubigeo)
-      );
-    },
+    // endPoint() {
+    //   return (
+    //     "/ubigeo/" +
+    //     (this.user.departamento == null ? "00" : this.user.departamento) +
+    //     "/" +
+    //     (this.user.provincia == null ? "00" : this.user.provincia) +
+    //     "/" +
+    //     (this.user.id_ubigeo == null ? "00" : this.user.id_ubigeo)
+    //   );
+    // },
   },
 
   methods: {
     escucha() {
       this.$nextTick(() => this.$refs.texto.focus());
     },
-    getUbigeo(val) {
-      if (val == 1) {
-        this.user.provincia = null;
-        this.user.id_ubigeo = null;
-      } else if (val == 2) {
-        this.user.id_ubigeo = null;
-      }
-      this.$http
-        .get(this.endPoint)
-        .then((response) => {
-          if (
-            this.user.departamento == null &&
-            this.user.provincia == null &&
-            this.user.id_ubigeo == null
-          ) {
-            this.listDepartamentos = response.data.data;
-          } else if (
-            this.user.departamento != null &&
-            this.user.provincia == null &&
-            this.user.id_ubigeo == null
-          ) {
-            this.listProvincias = response.data.data;
-          } else if (
-            this.user.departamento != null &&
-            this.user.provincia != null &&
-            this.user.id_ubigeo == null
-          ) {
-            this.listDistritos = response.data.data;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
+    // getUbigeo(val) {
+    //   if (val == 1) {
+    //     this.user.provincia = null;
+    //     this.user.id_ubigeo = null;
+    //   } else if (val == 2) {
+    //     this.user.id_ubigeo = null;
+    //   }
+    //   this.$http
+    //     .get(this.endPoint)
+    //     .then((response) => {
+    //       if (
+    //         this.user.departamento == null &&
+    //         this.user.provincia == null &&
+    //         this.user.id_ubigeo == null
+    //       ) {
+    //         this.listDepartamentos = response.data.data;
+    //       } else if (
+    //         this.user.departamento != null &&
+    //         this.user.provincia == null &&
+    //         this.user.id_ubigeo == null
+    //       ) {
+    //         this.listProvincias = response.data.data;
+    //       } else if (
+    //         this.user.departamento != null &&
+    //         this.user.provincia != null &&
+    //         this.user.id_ubigeo == null
+    //       ) {
+    //         this.listDistritos = response.data.data;
+    //       }
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
     sendData(usuario) {
       console.log(usuario)
 
