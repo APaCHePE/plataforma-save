@@ -20,16 +20,16 @@
                 <el-form-item prop="problema">
                   <h3 class="title text-blue">Tipo de problema</h3>
                   <el-select
-                    v-model="user.problema"
+                    v-model="user.idTipoTramite"
                     filterable
                     placeholder="Seleccione"
                     @change="getUbigeo(1)"
                   >
                     <el-option
-                      v-for="(item, index) in listDepartamentos"
+                      v-for="(item, index) in listTramites"
                       :key="index"
-                      :label="item.nombre"
-                      :value="item.codDepartamento"
+                      :label="item.descripcion"
+                      :value="item.idTipoTramite"
                     ></el-option>
                   </el-select>
                 </el-form-item>
@@ -51,7 +51,7 @@
               <el-input
                 class="textarea-height"
                 type="textarea"
-                v-model="user.descripcion"
+                v-model="user.descripcionTramite"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
@@ -64,7 +64,7 @@
                 v-if="radio == 1"
                 class="textarea-height"
                 type="text"
-                v-model="user.correo"
+                v-model="user.detalleMedioRespuesta"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
@@ -74,7 +74,7 @@
                 v-if="radio == 2"
                 class="textarea-height"
                 type="text"
-                v-model="user.telefono"
+                v-model="user.detalleMedioRespuesta"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
@@ -84,7 +84,7 @@
                 v-if="radio == 3"
                 class="textarea-height"
                 type="text"
-                v-model="user.carta"
+                v-model="user.detalleMedioRespuesta"
                 id="texto"
                 ref="texto"
                 :autofocus="true"
@@ -93,11 +93,11 @@
             </el-form-item>
             <p class="formP1">Adjuntar archivos (opcional):</p>
             <p class="formP2">Puedes subir un máximo de 20 MB en fotos, videos y/o textos que ayuden a evidenciar tu reclamo.</p>
-            <el-form-item class="element-left formSubirFile">
+            <!-- <el-form-item class="element-left formSubirFile">
               <el-button type="primary" round @click="send('user')"
                 >Sube tus archivos</el-button
               >
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item class="element-right">
               <el-button type="primary" round @click="send('user')"
                 >Registrar</el-button
@@ -132,24 +132,42 @@ export default {
   },
   data() {
     return {
-      // variable input radio
+      // variable input radio // una variable de input
       radio: false,
       labelPosition: "top",
       showModal: null,
       showModalSend: null,
       user: {
-        usuario: {
-          id_008_tipo: 15,
-          id_usuario_creador: 6,
-          telefono2: null,
-        },
-        problema: null,
+        // usuario: {
+        //   id_008_tipo: 15,
+        //   id_usuario_creador: 6,
+        //   telefono2: null,
+        // },
+        idTipoTramite: null,
         ubicacion: null,
-        descripcion: null,
-        correo: null,
-        telefono: null,
-        carta: null,
+        descripcionTramite: null,
+        detalleMedioRespuesta: null,
       },
+      listTramites: [
+        {
+          idTipoTramite: 1,
+          descripcion: "Adulto Mayor",
+          asunto: "tramite por Adulto Mayor",
+          idUnidadDestino: 11,
+        },
+        {
+          idTipoTramite: 2,
+          descripcion: "Discotecas y Bares",
+          asunto: "tramite por Discotecas y Bares",
+          idUnidadDestino: 12,
+        },
+        {
+          idTipoTramite: 3,
+          descripcion: "Fiscalización",
+          asunto: "tramite por Fiscalización",
+          idUnidadDestino: 13,
+        },
+      ],
       listDepartamentos: null,
       listProvincias: null,
       listDistritos: null,
@@ -229,20 +247,8 @@ export default {
         });
     },
     sendData(usuario) {
-      // console.log(usuario)
-      if (this.userlogin) {
-        this.user.usuario = {
-          ...this.user.usuario,
-          cuenta: usuario.cuenta,
-        };
-      } else {
-        this.user.usuario = {
-          ...this.user.usuario,
-          cuenta: usuario.cuenta,
-          clave: usuario.clave,
-          telefono1: usuario.telefono1,
-        };
-      }
+      console.log(usuario)
+
       this.$http
         .post("/asesoria/InsertAsesoria", this.user)
         .then((response) => {
@@ -257,17 +263,49 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+
+
+      // if (this.userlogin) {
+      //   this.user.usuario = {
+      //     ...this.user.usuario,
+      //     cuenta: usuario.cuenta,
+      //   };
+      // } else {
+      //   this.user.usuario = {
+      //     ...this.user.usuario,
+      //     cuenta: usuario.cuenta,
+      //     clave: usuario.clave,
+      //     telefono1: usuario.telefono1,
+      //   };
+      // }
+      // this.$http
+      //   .post("/asesoria/InsertAsesoria", this.user)
+      //   .then((response) => {
+      //     if (!this.userlogin) {
+      //       // alert(2222)
+      //       EventBus.$emit("sendData", this.user.usuario);
+      //     }
+      //     console.log(response);
+      //     this.close();
+      //     this.showModalSend = true;
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //   });
     },
     send(user) {
+      console.log("send(user)", this.user);
+      this.sendData(this.user);
+
       this.$refs[user].validate((valid) => {
         if (valid) {
-          if (this.userlogin) {
-            this.sendData(this.userlogin);
-          } else {
-            this.showModal = true;
-          }
+          // if (this.userlogin) {
+          //   this.sendData(this.userlogin);
+          // } else {
+          //   this.showModal = true;
+          // }
         } else {
-          console.log("error submit!!");
+          // console.log("error submit!!");
           return false;
         }
       });
