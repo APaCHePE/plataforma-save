@@ -7,11 +7,10 @@
       </span>
       <div class="element-center">
         <h1 class="text-blue">¡En horabuena!</h1>
-        <img src="@/assets/sendicon.png" alt />
+        <br />
+        <img src="@/assets/checkLogo.png" alt />
         <p class="description2">
-          Los mejores abogados del Perú conocerán tu problema e intentarán
-          ayudarte. Las notificaciones de ayuda llegarán pronto a tu correo
-          registrado.
+          Se ha registrado el incidente con el codigo del problema. En breve le enviaremos una notificacion.
         </p>
       </div>
       <el-form ref="form">

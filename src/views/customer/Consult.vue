@@ -23,7 +23,6 @@
                     v-model="user.idTipoTramite"
                     filterable
                     placeholder="Seleccione"
-                    @change="getUbigeo(1)"
                   >
                     <el-option
                       v-for="(item, index) in listTramites"
@@ -93,11 +92,12 @@
             </el-form-item>
             <p class="formP1">Adjuntar archivos (opcional):</p>
             <p class="formP2">Puedes subir un máximo de 20 MB en fotos, videos y/o textos que ayuden a evidenciar tu reclamo.</p>
-            <!-- <el-form-item class="element-left formSubirFile">
-              <el-button type="primary" round @click="send('user')"
+            <el-form-item class="element-left formSubirFile">
+              <!-- @click="send('user')" -->
+              <el-button type="primary" round
                 >Sube tus archivos</el-button
               >
-            </el-form-item> -->
+            </el-form-item>
             <el-form-item class="element-right">
               <el-button type="primary" round @click="send('user')"
                 >Registrar</el-button
@@ -184,21 +184,21 @@ export default {
           {
             required: true,
             message: "Seleccione problema",
-            trigger: "change",
+            trigger: "blur",
           },
         ],
         ubicacion: [
           {
             required: true,
             message: "Seleccione ubicacion",
-            trigger: "change",
+            trigger: "blur",
           },
         ],
         descripción_solicitante: [
-          { required: true, message: "Cuentanos tu problema", trigger: "change" },
+          { required: false, message: "Cuentanos tu problema", trigger: "change" },
         ],
         respuesta_solicitante: [
-          { required: true, message: "Seleccione medio de respuesta", trigger: "blur" },
+          { required: false, message: "Seleccione medio de respuesta", trigger: "change" },
         ],
       },
     };
@@ -239,16 +239,18 @@ export default {
         }
       });
 
+      this.showModalSend = true;
+
       this.$http
         .post("/solicitud/requerimientos/crear-solicitud", this.user)
         .then((response) => {
-          if (!this.userlogin) {
-            // alert(2222)
-            EventBus.$emit("sendData", this.user.usuario);
-          }
-          console.log(response);
           this.close();
           this.showModalSend = true;
+          // if (!this.userlogin) {
+          //   // alert(2222)
+          console.log(response);
+          EventBus.$emit("sendData", this.user.usuario);
+          // }
         })
         .catch((e) => {
           console.log(e);
