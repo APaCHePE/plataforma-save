@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import axios from 'axios'
+import VueSweetalert2 from 'vue-sweetalert2';
 // import EventBus from './helpers/EventBus'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
@@ -15,7 +16,10 @@ axios.defaults.baseURL = 'http://localhost:7991/api/'
 //axios.defaults.baseURL = 'http://localhost:8090/api/abogados'
 
 
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 Vue.prototype.$userLogged = true
+Vue.use(VueSweetalert2);
 
 // Validación Login por Router
 const rutasPermitidas = {
