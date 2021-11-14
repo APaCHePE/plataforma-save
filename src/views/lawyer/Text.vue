@@ -6,20 +6,11 @@
           <router-link to="/lawyer"><i class="el-icon-back"></i>Regresar</router-link>
         </p>
         <p>
-          Lugar:  
-          {{( listAsesoriaAbogado == null || listAsesoriaAbogado==undefined || listAsesoriaAbogado.length==0 ) ? '' : listAsesoriaAbogado.ubigeo2.nombre}} -
-          {{( listAsesoriaAbogado == null || listAsesoriaAbogado==undefined || listAsesoriaAbogado.length==0 ) ? '' : listAsesoriaAbogado.ubigeo1.nombre}} -
-          {{( listAsesoriaAbogado == null || listAsesoriaAbogado==undefined || listAsesoriaAbogado.length==0 ) ? '' : listAsesoriaAbogado.ubigeo.nombre}}
-        </p>
+          Lugar:  Miraflores</p>
         <p>
-          Fecha:  
-          {{( listAsesoriaAbogado == null || listAsesoriaAbogado==undefined || listAsesoriaAbogado.length==0 ) ? '' : listAsesoriaAbogado.asesoria.fecha_creacion}}
+          Fecha:  {{fechaActual}}
         </p>
-        <h1 class="title text-blue">Caso numero {{( listAsesoriaAbogado == null || listAsesoriaAbogado==undefined || listAsesoriaAbogado.length==0 ) ? '' : listAsesoriaAbogado.id_asesoria_abogado}}</h1>
-        <output>
-          {{( listAsesoriaAbogado == null || listAsesoriaAbogado==undefined || listAsesoriaAbogado.length==0 ) ? '' : listAsesoriaAbogado.asesoria.descripción_asistente}}
-        </output>
-        <div v-if="listAsesoriaAbogado!=null&&listAsesoriaAbogado.respuesta == null">
+        <div >
           <el-form :label-position="labelPosition" :model="listUpAsesoriaAbogado" label-width="100px" :rules="rules" ref="listUpAsesoriaAbogado" hide-required-asterisk>
             <el-form-item prop="descripción_solicitante">
               <h1 class="title text-blue">Responde al caso</h1>
@@ -27,16 +18,6 @@
             </el-form-item>
             <el-form-item class="element-right">
               <el-button type="primary"  @click="grabarmodal()" round>Responder</el-button>
-            </el-form-item>
-          </el-form>
-        </div>
-        <div v-else>
-          <el-form :label-position="labelPosition" :model="listAsesoriaAbogado" label-width="100px" :rules="rules" ref="listAsesoriaAbogado" hide-required-asterisk>
-            <el-form-item prop="listAsesoriaAbogado">
-            <h1 class="title text-blue">Tu respuesta al caso</h1>
-            <template v-if="listAsesoriaAbogado!=null">
-              <el-input class="textarea-height" type="textarea" v-model="listAsesoriaAbogado.respuesta" disabled></el-input>
-            </template>
             </el-form-item>
           </el-form>
         </div>
@@ -55,6 +36,9 @@ export default {
     MessageAnswer
   },
   created() {
+    var fecha =new Date()
+    var mes = fecha.getMonth()+1
+    this.fechaActual = fecha.getDate() +"/"+ mes +"/"+ fecha.getFullYear()
     document.body.style.backgroundColor = "#fff";
     // this.getUbigeo();
     this.getAsesoriaAbogado();
@@ -63,6 +47,10 @@ export default {
   },
   data() {
     return {
+
+      //nuevas variables 
+      fechaActual:null,
+      //
       cambiarEstado: {
         id_asesoria: null,
         id_005_estado: 9
