@@ -5,111 +5,130 @@
         <p class="back">
           <router-link to="/"><i class="el-icon-back"></i>Regresar</router-link>
         </p>
-        <h1 class="title text-blue">Cuentanos tu problema</h1>
+        <div v-if="!preForm">
+          <h1 class="title text-blue">Cuentanos tu problema</h1>
+          <div>
+            <el-form
+              :label-position="labelPosition"
+              :model="user"
+              label-width="100px"
+              :rules="rules"
+              ref="user"
+              hide-required-asterisk
+            >
+              <el-form-item>
+                <div class="min-m">
+                  <el-form-item prop="problema">
+                    <h3 class="title text-blue">Tipo de problema</h3>
+                    <el-select
+                      v-model="user.idTipoTramite"
+                      filterable
+                      placeholder="Seleccione"
+                    >
+                      <el-option
+                        v-for="(item, index) in listTramites"
+                        :key="index"
+                        :label="item.descripcion"
+                        :value="item.idTipoTramite"
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item prop="ubicacion">
+                    <h3 class="title text-blue">Ubicación de ocurrencia</h3>
+                    <el-input
+                      type="text"
+                      placeholder="Escriba una Av./Calle/Jr./Psje"
+                      id="texto"
+                      ref="texto"
+                      v-model="user.ubicacion"
+                      :autofocus="true"
+                    ></el-input>
+                  </el-form-item>
+                </div>
+              </el-form-item>
+              <el-form-item prop="descripción_solicitante">
+                <h3 class="title text-blue">Descripción</h3>
+                <el-input
+                  class="textarea-height"
+                  type="textarea"
+                  v-model="user.descripcionTramite"
+                  id="texto"
+                  ref="texto"
+                  :autofocus="true"
+                ></el-input>
+              </el-form-item>
+              <el-form-item prop="respuesta_solicitante">
+                <h3 class="title text-blue">Medio de Respuesta</h3>
+                <el-radio v-model="radio" label="1">Correo</el-radio><br/>
+                <el-input
+                  v-if="radio == 1"
+                  class="textarea-height"
+                  type="text"
+                  v-model="user.detalleMedioRespuesta"
+                  id="texto"
+                  ref="texto"
+                  :autofocus="true"
+                ></el-input>
+                <el-radio v-model="radio" label="2">Teléfono</el-radio><br/>
+                <el-input
+                  v-if="radio == 2"
+                  class="textarea-height"
+                  type="text"
+                  v-model="user.detalleMedioRespuesta"
+                  id="texto"
+                  ref="texto"
+                  :autofocus="true"
+                ></el-input>
+                <el-radio v-model="radio" label="3">Carta</el-radio><br/>
+                <el-input
+                  v-if="radio == 3"
+                  class="textarea-height"
+                  type="text"
+                  v-model="user.detalleMedioRespuesta"
+                  id="texto"
+                  ref="texto"
+                  :autofocus="true"
+                ></el-input>
+                <el-radio v-model="radio" label="4">No deseo que me respondan</el-radio>
+              </el-form-item>
+              <p class="formP1">Adjuntar archivos (opcional):</p>
+              <p class="formP2">Puedes subir un máximo de 20 MB en fotos, videos y/o textos que ayuden a evidenciar tu reclamo.</p>
+              <el-form-item class="element-left formSubirFile">
+                <!-- @click="send('user')" -->
+                <el-upload
+                  class="upload-demo"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :on-change="handleChange"
+                  :auto-upload="false"
+                  :file-list="fileList">
+                  <el-button size="medium" type="primary" round>Sube tus archivos</el-button>
+                  <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
+                </el-upload>
+              </el-form-item>
+              <el-form-item class="element-right">
+                <el-button type="primary" round @click="send('user')"
+                  >Registrar</el-button
+                >
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
         <div>
-          <el-form
-            :label-position="labelPosition"
-            :model="user"
-            label-width="100px"
-            :rules="rules"
-            ref="user"
-            hide-required-asterisk
-          >
-            <el-form-item>
-              <div class="min-m">
-                <el-form-item prop="problema">
-                  <h3 class="title text-blue">Tipo de problema</h3>
-                  <el-select
-                    v-model="user.idTipoTramite"
-                    filterable
-                    placeholder="Seleccione"
-                  >
-                    <el-option
-                      v-for="(item, index) in listTramites"
-                      :key="index"
-                      :label="item.descripcion"
-                      :value="item.idTipoTramite"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item prop="ubicacion">
-                  <h3 class="title text-blue">Ubicación de ocurrencia</h3>
-                  <el-input
-                    type="text"
-                    placeholder="Escriba una Av./Calle/Jr./Psje"
-                    id="texto"
-                    ref="texto"
-                    v-model="user.ubicacion"
-                    :autofocus="true"
-                  ></el-input>
-                </el-form-item>
-              </div>
-            </el-form-item>
-            <el-form-item prop="descripción_solicitante">
-              <h3 class="title text-blue">Descripción</h3>
-              <el-input
-                class="textarea-height"
-                type="textarea"
-                v-model="user.descripcionTramite"
-                id="texto"
-                ref="texto"
-                :autofocus="true"
-              ></el-input>
-            </el-form-item>
-            <el-form-item prop="respuesta_solicitante">
-              <h3 class="title text-blue">Medio de Respuesta</h3>
-              <el-radio v-model="radio" label="1">Correo</el-radio><br/>
-              <el-input
-                v-if="radio == 1"
-                class="textarea-height"
-                type="text"
-                v-model="user.detalleMedioRespuesta"
-                id="texto"
-                ref="texto"
-                :autofocus="true"
-              ></el-input>
-              <el-radio v-model="radio" label="2">Teléfono</el-radio><br/>
-              <el-input
-                v-if="radio == 2"
-                class="textarea-height"
-                type="text"
-                v-model="user.detalleMedioRespuesta"
-                id="texto"
-                ref="texto"
-                :autofocus="true"
-              ></el-input>
-              <el-radio v-model="radio" label="3">Carta</el-radio><br/>
-              <el-input
-                v-if="radio == 3"
-                class="textarea-height"
-                type="text"
-                v-model="user.detalleMedioRespuesta"
-                id="texto"
-                ref="texto"
-                :autofocus="true"
-              ></el-input>
-              <el-radio v-model="radio" label="4">No deseo que me respondan</el-radio>
-            </el-form-item>
-            <p class="formP1">Adjuntar archivos (opcional):</p>
-            <p class="formP2">Puedes subir un máximo de 20 MB en fotos, videos y/o textos que ayuden a evidenciar tu reclamo.</p>
-            <el-form-item class="element-left formSubirFile">
-              <!-- @click="send('user')" -->
-              <el-upload
-                class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-change="handleChange"
-                :auto-upload="false"
-                :file-list="fileList">
-                <el-button size="medium" type="primary" round>Sube tus archivos</el-button>
-                <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
-              </el-upload>
-            </el-form-item>
-            <el-form-item class="element-right">
-              <el-button type="primary" round @click="send('user')"
-                >Registrar</el-button
-              >
-            </el-form-item>
-          </el-form>
+          <h1 class="title text-blue">Necesitamos Verificar tus datos</h1>
+          <div>
+            <label>Ingresa tu DNI</label>
+            <el-row :gutter="10">
+              <el-col  :md="10">
+                <el-input style="width: 100%" v-model="numeroDocumento"></el-input>
+              </el-col>
+              <el-col  :md="4">
+                <el-input style="width: 100%" v-model="digitoVerificador"></el-input>
+              </el-col>
+              <el-col  :md="4">
+                <el-button type="primary" @click="validarPreFormulario()">Validar</el-button>
+              </el-col>
+            </el-row>
+          </div>
         </div>
         <modal-register
           v-if="showModal"
@@ -125,6 +144,7 @@
 import ModalRegister from "@/views/shared/login/ModalRegister.vue";
 import ModalMessage from "@/components/shared/ModalMessage.vue";
 import EventBus from "@/helpers/EventBus";
+import axios from "axios"
 export default {
   props: ["userlogin"],
   components: {
@@ -139,6 +159,10 @@ export default {
   data() {
     return {
       // variable input radio // una variable de input
+      preForm: true,
+      numeroDocumento: null,
+      digitoVerificador: null,
+      nombresCompletos: null, 
       radio: false,
       labelPosition: "top",
       showModal: null,
@@ -224,8 +248,41 @@ export default {
   },
 
   methods: {
+    validarPreFormulario(){
+      let url = "https://mz-services-test.miraflores.gob.pe:8090/api/persona/datos-pide/"+this.numeroDocumento;
+      let objeto = {
+        usuario: "40606185", 
+        correoUsuario: "david.arias@miraflores.gob.pe"
+      }
+      axios.post(url, objeto).then(response => {
+        console.log(response.data)
+        this.nombresCompletos = response.data.data.persona.prenombres + " " +response.data.data.persona.apPrimer + " " +response.data.data.persona.apSegundo
+        console.log("Ah pasado el tiempo ");
+        this.$swal.fire({
+          showCloseButton: true,
+          showCancelButton: true,
+          title: 'Verifica tus datos',
+          html: 'Hola '+this.nombresCompletos+', si no eres tú vuelve a validar tus datos',
+          icon: 'success',
+          confirmButtonText:
+            'Sí, Soy YO!',
+          cancelButtonText:
+            'Salir',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.preForm = false
+          } 
+        })
+      }).catch((e) => {
+        console.log(e);
+        this.$swal.fire(
+          'Ocurrió un problema',
+          'intente mas tarde',
+          'info',)
+      })
+    },
     escucha() {
-      this.$nextTick(() => this.$refs.texto.focus());
+      // this.$nextTick(() => this.$refs.texto.focus());
     },
     sendData(usuario) {
       console.log(' sendData', usuario)
