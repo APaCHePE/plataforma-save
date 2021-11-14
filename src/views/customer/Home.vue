@@ -10,7 +10,7 @@
       <div class="bottom">
         <router-link to="/consult" class="card">
           <div class="card-left">
-            <img src="@/assets/icono1.png" alt="" />
+            <img src="@/assets/icono2.png" alt="" />
           </div>
           <div class="card-right">
             <h1>Servicio de Atencion Vecinal</h1>
