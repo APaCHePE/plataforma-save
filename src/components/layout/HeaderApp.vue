@@ -5,6 +5,7 @@
         <div class="logo" v-if="user">
           <router-link to="/" v-if="user.id_008_tipo == 15 | user.id_008_tipo == 5">.pe</router-link>
           <router-link to="/lawyer" v-if="user.id_008_tipo == 16">Tuasesorlegal.pe</router-link>
+          <img src="../../assets/images/miraflores-en-tu-corazon.png" width="100px"/>
         </div>
         <div class="logo" v-if="!user">
           <router-link to="/"><img src="../../assets/images/miraflores-en-tu-corazon.png" width="100px"/></router-link>
@@ -96,6 +97,7 @@ export default {
 }
 header {
   display: flex;
+  background-color: #eaf0f9;
 }
 .btn {
   padding: 10px 25px;

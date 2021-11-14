@@ -15,7 +15,7 @@
           <div class="card-right">
             <h1>Servicio de Atencion Vecinal</h1>
             <p>
-              Juntos mejoramos nuestro distrito, deseo 
+              Juntos mejoramos nuestro distrito, 
               <span>reportar un incidente.</span>
             </p>
             <i class="el-icon-arrow-right"></i>

@@ -156,7 +156,7 @@ export default {
 <style lang="scss">
 header {
   display: flex;
-  background: #ddf3ff;
+  // background: #ddf3ff;
 }
 .light {
   .bottom {

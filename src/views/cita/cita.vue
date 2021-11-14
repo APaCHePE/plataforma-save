@@ -238,7 +238,7 @@ color: #3A7BDD;
 
 header {
   display: flex;
-  background: #ddf3ff;
+  // background: #ddf3ff;
 }
 .light {
   .bottom {

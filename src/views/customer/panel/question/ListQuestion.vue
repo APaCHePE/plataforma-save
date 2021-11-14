@@ -255,7 +255,7 @@ export default {
 }
 header {
   display: flex;
-  background: #ddf3ff;
+  // background: #ddf3ff;
 }
 .light {
   .bottom {
