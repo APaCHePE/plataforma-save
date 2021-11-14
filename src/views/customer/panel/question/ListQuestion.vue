@@ -34,7 +34,7 @@
               style="width: 100%">
               <el-table-column
                 width="100"
-                prop="id_asesoria"
+                prop="idAsesoria"
                 label="Código">
               </el-table-column>
               <el-table-column
@@ -43,14 +43,12 @@
                 label="Descripción">
               </el-table-column>
               <el-table-column
-                prop="id_005_estado"
+                prop="id005Estado"
                 label="Estado">
-
                 <template slot-scope="scope">
-                  <router-link v-if="userlogin.flag_activado & scope.row.id_005_estado == 22 & scope.row.descripción_asistente != null" class="el-button el-button--primary el-button--mini" :to="'/panel/detail-question/'+scope.row.id_asesoria">Ver respuesta</router-link>
+                  <router-link v-if="userlogin.flagActivado && scope.row.id005Estado == 22 && scope.row.descripciónAsistente != null" class="el-button el-button--primary el-button--mini" :to="'/panel/detail-question/'+scope.row.idAsesoria">Ver respuesta</router-link>
                   <el-button v-else disabled size="mini" type="warning">pendiente</el-button>
                 </template>
-
               </el-table-column>
             </el-table>
 
@@ -77,13 +75,13 @@
               <el-table-column type="expand">
                   <template slot-scope="scope">
                   <p style="color: #3a7bdd">Estado de la Asesoria</p><br>
-                  <router-link v-if="userlogin.flag_activado & scope.row.id_005_estado == 22 & scope.row.descripción_asistente != null" class="el-button el-button--primary el-button--mini" :to="'/panel/detail-question/'+scope.row.id_asesoria">Ver respuesta</router-link>
+                  <router-link v-if="userlogin.flagActivado && scope.row.id005Estado == 22 && scope.row.descripciónAsistente != null" class="el-button el-button--primary el-button--mini" :to="'/panel/detail-question/'+scope.row.idAsesoria">Ver respuesta</router-link>
                   <el-button class="pending" v-else disabled size="mini" type="warning">pendiente</el-button>
                 </template>
              </el-table-column>
               <el-table-column
                 
-                prop="id_asesoria"
+                prop="idAsesoria"
                 label="Código">
               </el-table-column>
               <el-table-column
@@ -117,27 +115,19 @@
           <template v-else>
             <div style="justify-content: center; align-items: center;height: 150px;display: flex;"> 
               <p class="not-data">
-                <i class="el-icon-message"></i>No hay citas pendientes
+                <i class="el-icon-message"></i>Estamos trabajando en esta nueva sección
               </p>
             </div>
             </template>
         </div>
 
-
 <!-- -------------------------------------------------------- -->
 
-
             <!-- </el-card> -->
-          
           </div>
         </div>
       </div>
     </div>
-    <!-- <template v-if="modalVoucher">
-      <el-dialog :visible.sync="modalVoucher">
-        <modal-voucher :idCita="id_cita"></modal-voucher>
-      </el-dialog>  
-    </template>  -->
   </div>
 </template>
 
@@ -154,27 +144,44 @@ export default {
     return {
       visibleMisConsultas: true,
       visibleMisCitas: false,
-      listQuestion: [''],
+      listQuestion: [],
       verificar: '',
       cita:null,
       // modalVoucher: false,
      
      SubirV:{
         voucher:'',
-        id_cita: 9
+        idCita: 9
       },
-    // id_cita: null,
+    // idCita: null,
 
     }
   },
   created() {
+    this.userlogin= {
+      flagActivado : true,
+    };
+    this.listQuestion= [
+      {
+        idAsesoria : 10,
+        descripcionAsistenteRecortado : "descripcionAsistenteRecortado",
+        id005Estado : 22,
+        descripciónAsistente : "",
+      },
+      {
+        idAsesoria : 11,
+        descripcionAsistenteRecortado : "descripcionAsistenteRecortado",
+        id005Estado : 23,
+        descripciónAsistente : "",
+      }
+    ];
     // this.ListCitas()
     // this.getQuestions()
   },
   methods: {
 // openModal(valor){
 //   this.modalVoucher=true
-//   this.id_cita = valor;
+//   this.idCita = valor;
 // },
    consultas(){
       this.visibleMisConsultas=true,
@@ -189,18 +196,18 @@ export default {
 
 
     getQuestions() {
-      const endpoint = '/getAsesoria/00/'+this.userlogin.id_usuario+'/00/00'
+      const endpoint = '/getAsesoria/00/'+this.userlogin.idUsuario+'/00/00'
 
       this.$http.get(endpoint).then((response) => {
         response.data.resultado.forEach(element => {
-          element.descripcionAsistenteRecortado = this.recortar(element.descripción_solicitante)
+          element.descripcionAsistenteRecortado = this.recortar(element.descripciónSolicitante)
         });
 
         let data = response.data.resultado;
           let array = [];
            if(data!=null){
           data.forEach(item => {
-            if(item.descripción_solicitante != null){
+            if(item.descripciónSolicitante != null){
              
               array.push(item)
             }
@@ -219,9 +226,9 @@ export default {
     },
 
     ListCitas(){
-       const endpoint = "/listarCitas/0/"+this.userlogin.id_usuario+"/0/0";
+       const endpoint = "/listarCitas/0/"+this.userlogin.idUsuario+"/0/0";
       this.$http.get(endpoint).then(response => {
-      //if(response.data.Body.id_011_estado = 24)
+      //if(response.data.Body.id011Estado = 24)
       this.cita = response.data.Body;
       });
     },

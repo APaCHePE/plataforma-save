@@ -104,6 +104,7 @@
 import Slopes from "./Slopes.vue"
 // import Horario from "../cita/Horario.vue"
 import EventBus from '@/helpers/EventBus'
+import moment from 'moment';
 export default {
   components: {
     Slopes,
@@ -130,12 +131,52 @@ export default {
   created() {
     this.listQuestion = [
       {
-        descripcionAsistenteRecortado: "asda",
+        asesoria: {
+          id_formato: 12,
+          descripcionAsistenteRecortado: "Se ha registrado el incidente con el codigo del problema. En breve le enviaremos una notificacion.",
+        },
+        fecha_creacion: moment(new Date()).format("DD-MM-YYYY")  ,
+        respuesta: ""
+      },
+      {
+        asesoria: {
+          id_formato: 12,
+          descripcionAsistenteRecortado: "Se ha registrado el incidente con el codigo del problema. En breve le enviaremos una notificacion.",
+        },
+        fecha_creacion: moment(new Date()).format("DD-MM-YYYY")  ,
+        respuesta: ""
+      },
+      {
+        asesoria: {
+          id_formato: 12,
+          descripcionAsistenteRecortado: "Se ha registrado el incidente con el codigo del problema. En breve le enviaremos una notificacion.",
+        },
+        fecha_creacion: moment(new Date()).format("DD-MM-YYYY")  ,
+        respuesta: ""
+      },
+      {
+        asesoria: {
+          id_formato: 12,
+          descripcionAsistenteRecortado: "Se ha registrado el incidente con el codigo del problema. En breve le enviaremos una notificacion.",
+        },
+        fecha_creacion: moment(new Date()).format("DD-MM-YYYY")  ,
+        respuesta: ""
       }
     ];
     this.listQuestion1 = [
       {
-        descripcionAsistenteRecortado: "asda",
+        asesoria: {
+          id_formato: 14,
+          descripcionAsistenteRecortado: "Se ha registrado el incidente con el codigo del problema. En breve le enviaremos una notificacion.",
+        },
+        fecha_creacion: moment(new Date()).format("DD-MM-YYYY"),
+      },
+      {
+        asesoria: {
+          id_formato: 14,
+          descripcionAsistenteRecortado: "Se ha registrado el incidente con el codigo del problema. En breve le enviaremos una notificacion.",
+        },
+        fecha_creacion: moment(new Date()).format("DD-MM-YYYY"),
       }
     ];
      console.log(this.$route.params["hash"]);

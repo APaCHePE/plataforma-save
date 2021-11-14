@@ -21,7 +21,6 @@
           <a class="btn light" href="#" @click="$emit('logout')">Cerrar Sesión</a>
         </div>
 
-
         <div class="r-btn" v-else>
           <a class="btn" href="#" @click="$emit('showmodal', { modal: true , tipo: 1}); $emit('tipoLogin', 1)">Ingresa a tu cuenta</a>
           <a class="btn" href="#" @click="$emit('showmodal', { modal: true , tipo: 2}); $emit('tipoLogin', 2)">Soy Funcionario</a>
