@@ -94,9 +94,15 @@
             <p class="formP2">Puedes subir un máximo de 20 MB en fotos, videos y/o textos que ayuden a evidenciar tu reclamo.</p>
             <el-form-item class="element-left formSubirFile">
               <!-- @click="send('user')" -->
-              <el-button type="primary" round
-                >Sube tus archivos</el-button
-              >
+              <el-upload
+                class="upload-demo"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-change="handleChange"
+                :auto-upload="false"
+                :file-list="fileList">
+                <el-button size="medium" type="primary" round>Sube tus archivos</el-button>
+                <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
+              </el-upload>
             </el-form-item>
             <el-form-item class="element-right">
               <el-button type="primary" round @click="send('user')"
@@ -127,7 +133,7 @@ export default {
   },
   created() {
     document.body.style.backgroundColor = "#fff";
-    this.getUbigeo();
+    // this.getUbigeo();
     this.escucha();
   },
   data() {
@@ -144,6 +150,7 @@ export default {
         detalleMedioRespuesta: null,
         idUsuarioCreador:5268
       },
+      fileList: [],
       listTramites: [
         {
           idTipoTramite: 1,
@@ -304,6 +311,9 @@ export default {
     close() {
       this.showModal = false;
     },
+    handleChange(file, fileList) {
+      this.fileList = fileList.slice(-3);
+    }
   },
 };
 </script>
